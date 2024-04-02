@@ -1,0 +1,32 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-display {
+    font-size: 1.1rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.options{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.add-task {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+.task-completed {
+    text-decoration-line: line-through;
+}
+
+button {
+    font-size: 1rem;
+}
