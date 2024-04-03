@@ -30,9 +30,7 @@ export class ListComponent implements OnInit {
   p: number = 1;
 
   getTodo(): void {
-    this.todos = this.todoService.getTodos().pipe(
-      tap((todos) => {})
-    )
+    this.todos = this.todoService.getTodos();
   }
 
   addTodo(): void {

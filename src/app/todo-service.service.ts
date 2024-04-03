@@ -9,9 +9,6 @@ export class TodoServiceService {
   constructor() {}
 
   getTodos(): Observable<Todo[]> {
-    // let observale = new Observable<Todo[]>((observer) => {
-    //   observer.next(todos ? JSON.parse(todos) : []);
-    // });
     const todos = sessionStorage.getItem('todos');
     return of(todos ? JSON.parse(todos) : []);
 
