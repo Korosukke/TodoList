@@ -4,26 +4,30 @@
         <input type="text" [(ngModel)]="task">
         <button (click)="addTodo()">Add Task</button>
     </div>
-    <ol cdkDropList (cdkDropListDropped)="drop($event)">
-        <li cdkDrag *ngFor="let todo of (todos | async)! | paginate: { itemsPerPage: 7, currentPage: p } ">
-            <div class="task-display" *ngIf="todo.makeUpdate;else change">
-                <input type="checkbox" name="task-complete" (change)="completeTodo(todo.id)" [checked]="todo.completed">
-                <p [class.task-completed]="todo.completed">{{todo.task | textFormat }}</p>
-                <div class="options">
-                    <button (click)="removeTodo(todo.id)">Remove</button>
-                    <button (click)="updateTodo(todo.id)">Edit</button>
-                </div>
-            </div>
-            <ng-template #change>
-                <div class="task-display">
-                    <input [(ngModel)]="updatedTask" />
+    <div class="content">
+        <mat-progress-bar mode="determinate" [value]="checked"></mat-progress-bar>
+        <ol cdkDropList (cdkDropListDropped)="drop($event)">
+            <li cdkDrag *ngFor="let todo of (todos | async)! | paginate: { itemsPerPage: 7, currentPage: p } ">
+                <div class="task-display" *ngIf="todo.makeUpdate;else change">
+                    <input type="checkbox" name="task-complete" (change)="completeTodo(todo.id)"
+                        [checked]="todo.completed">
+                    <p [class.task-completed]="todo.completed">{{todo.task | textFormat }}</p>
                     <div class="options">
-                        <button (click)="saveTodo(todo.id)">Save</button>
-                        <button (click)="cancel(todo.id)">Cancel</button>
+                        <button (click)="removeTodo(todo.id)">Remove</button>
+                        <button (click)="updateTodo(todo.id)">Edit</button>
                     </div>
                 </div>
-            </ng-template>
-        </li>
-    </ol>
+                <ng-template #change>
+                    <div class="task-display">
+                        <input [(ngModel)]="updatedTask" />
+                        <div class="options">
+                            <button (click)="saveTodo(todo.id)">Save</button>
+                            <button (click)="cancel(todo.id)">Cancel</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ol>
+    </div>
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

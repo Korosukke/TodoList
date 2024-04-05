@@ -4,8 +4,6 @@ import { Todo } from '../todo';
 import { Observable, tap } from 'rxjs';
 import {
   CdkDragDrop,
-  CdkDropList,
-  CdkDrag,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 
@@ -28,9 +26,13 @@ export class ListComponent implements OnInit {
   updatedTask: string = '';
   taskComplete: boolean = false;
   p: number = 1;
+  checked!:number;
 
   getTodo(): void {
     this.todos = this.todoService.getTodos();
+    this.todos.subscribe((todos) => {
+      this.checked = ((todos.filter((todo) => todo.completed).length)/todos.length)*100;
+    })
   }
 
   addTodo(): void {
@@ -70,12 +72,15 @@ export class ListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    this.todoService.getTodos().pipe(
-      tap((todos) => {
-        moveItemInArray(todos, event.previousIndex, event.currentIndex);
-        this.todoService.updateList(todos);
-      })
-    ).subscribe();
+    this.todoService
+      .getTodos()
+      .pipe(
+        tap((todos) => {
+          moveItemInArray(todos, event.previousIndex, event.currentIndex);
+          this.todoService.updateList(todos);
+        })
+      )
+      .subscribe();
     this.getTodo();
   }
 }

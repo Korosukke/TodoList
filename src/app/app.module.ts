@@ -9,6 +9,7 @@ import { TextFormatPipe } from './text-format.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     AppRoutingModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
